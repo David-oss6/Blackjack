@@ -1,0 +1,43 @@
+body {
+  background-color: #308834;
+  background-image: linear-gradient(top, #1a4a1c, #308834);
+}
+.stage {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+}
+.player_cards {
+  display: flex;
+  flex-flow: row wrap;
+}
+.player_card0 {
+  position: relative;
+}
+.player_card1 {
+  position: relative;
+  left: -50px;
+}
+.player_card2 {
+  position: relative;
+  left: -100px;
+}
+.player_card3 {
+  position: relative;
+  left: -150px;
+}
+.player_card4 {
+  position: relative;
+  left: -200px;
+}
+.player_card6 {
+  position: relative;
+  left: -250px;
+}
+.ia_cards {
+  display: flex;
+  flex-flow: row wrap;
+}
+img {
+  height: 150px;
+}
