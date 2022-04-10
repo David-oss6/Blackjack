@@ -2,6 +2,27 @@ body {
   background-color: #308834;
   background-image: linear-gradient(top, #1a4a1c, #308834);
 }
+.title {
+  font-size: 3rem;
+  text-shadow: 1px 1px 1px goldenrod;
+}
+.header {
+  margin-top: 100px;
+  text-align: center;
+  margin-bottom: 50px;
+}
+.btn {
+  width: 100px;
+  height: 30px;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: grab;
+}
+.btn:active {
+  cursor: grabbing;
+}
+
 .stage {
   display: flex;
   flex-wrap: nowrap;
@@ -34,10 +55,39 @@ body {
   position: relative;
   left: -250px;
 }
+.player_card7 {
+  position: relative;
+  left: -300px;
+}
 .ia_cards {
   display: flex;
   flex-flow: row wrap;
 }
 img {
   height: 150px;
+  box-shadow: 2px 2px 8px black;
+}
+.player_div {
+  display: flex;
+  flex-flow: column;
+  justify-content: start;
+  align-items: center;
+  width: 600px;
+  height: 300px;
+}
+.ia_div {
+  display: flex;
+  flex-flow: column;
+  justify-content: start;
+  align-items: center;
+  width: 600px;
+  height: 300px;
+}
+
+.result {
+  font-size: 2rem;
+  font-weight: bolder;
+  color: goldenrod;
+  text-shadow: black 1px 1px 8px;
+  text-align: center;
 }

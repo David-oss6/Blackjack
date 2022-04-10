@@ -16,6 +16,7 @@ export default function Blackjack() {
   const [finish, setFinish] = useState({
     playing: true,
     winner: null,
+    draw: false,
   });
 
   async function getCards() {
@@ -84,6 +85,7 @@ export default function Blackjack() {
   useEffect(() => {
     if (playerScore > 21 && ace === 0) {
       setFinish({
+        ...finish,
         playing: false,
         winner: "IA",
       });
@@ -92,11 +94,13 @@ export default function Blackjack() {
       setAce(ace - 1);
     } else if (playerScore === 21) {
       setFinish({
+        ...finish,
         playing: false,
         winner: "Player",
       });
     } else if (iaScore > 21) {
       setFinish({
+        ...finish,
         playing: false,
         winner: "Player",
       });
@@ -105,8 +109,15 @@ export default function Blackjack() {
         iaDrawCard();
       } else if (plantar && iaScore > playerScore && iaScore < 22) {
         setFinish({
+          ...finish,
           playing: false,
           winner: "IA",
+        });
+      } else if (plantar && iaScore === playerScore) {
+        setFinish({
+          playing: false,
+          winner: "NoOne",
+          draw: true,
         });
       }
     }
@@ -159,45 +170,59 @@ export default function Blackjack() {
     setFinish({
       playing: true,
       winner: null,
+      draw: false,
     });
   };
 
   return (
-    <div className="game">
-      <h1>Blackjack</h1>
-      <button onClick={() => playerDrawCard()}>Draw Card</button>
-      <button onClick={() => stand()}>Stand</button>
-      <button onClick={() => handleReset()}>Reset</button>
+    <>
+      <div className="header">
+        <h1 className="title">BLACKJACK</h1>
+        <button className="btn" onClick={() => playerDrawCard()}>
+          Draw Card
+        </button>
+        <button className="btn" onClick={() => stand()}>
+          Stand
+        </button>
+        <button className="btn" onClick={() => handleReset()}>
+          Reset
+        </button>
+      </div>
       <div className="stage">
-        <div className="player_cards">
-          {playerCards &&
-            playerCards.map((card, index) => (
-              <img
-                key={index}
-                className={`player_card${index}`}
-                src={card.image}
-                alt="card"
-                title={card.code}
-              />
-            ))}
+        <div className="player_div">
+          <div className="player_cards">
+            {playerCards &&
+              playerCards.map((card, index) => (
+                <img
+                  key={index}
+                  className={`player_card${index}`}
+                  src={card.image}
+                  alt="card"
+                  title={card.code}
+                />
+              ))}
+          </div>
+          {playerScore > 0 && <h3>Your score: {playerScore}</h3>}
         </div>
-        <div className="ia_cards">
-          {iaCards &&
-            iaCards.map((card, index) => (
-              <img
-                className={`player_card${index}`}
-                key={index}
-                src={card.image}
-                alt="card"
-                title={card.code}
-              />
-            ))}
+        <div className="ia_div">
+          <div className="ia_cards">
+            {iaCards &&
+              iaCards.map((card, index) => (
+                <img
+                  className={`player_card${index}`}
+                  key={index}
+                  src={card.image}
+                  alt="card"
+                  title={card.code}
+                />
+              ))}
+          </div>
+          {iaScore > 0 && <h3>IA score: {iaScore}</h3>}
         </div>
       </div>
 
-      {playerScore > 0 && <h3>{playerScore}</h3>}
-      {iaScore > 0 && <h3>{iaScore}</h3>}
-      {finish.playing ? "" : <p>{finish.winner} wins</p>}
-    </div>
+      {finish.playing ? "" : <p className="result">{finish.winner} WINS</p>}
+      {finish.draw && <p className="result"> DRAW </p>}
+    </>
   );
 }
